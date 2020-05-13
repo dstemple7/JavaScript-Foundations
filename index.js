@@ -151,11 +151,47 @@ variableInterestRate(200000, 0.04, 30);
 
 /*  🏡 Add  `Property Tax`, `Homeowner's insurance` and `HOA fees` as parameters in your function to calculate total monthly spending on housing */
 
+function mortgageCalculator2(P, I, N, PT, HI, HOA){
+    let numerator = (I/12) * Math.pow((1 + (I/12)), (N*12));
+    let denominator = Math.pow((1 + (I/12)),(N*12))-1;  
+    let monthlyRateLong = P * (numerator / denominator);
+    let monthlyRate = monthlyRateLong + (monthlyRateLong*PT) + (monthlyRateLong*HI) + (monthlyRateLong*HOA)
+    let monthlyRateFinal = monthlyRate.toFixed(2);
+    let namedMortgage = name +", your monthly rate is $";
+    let quote = namedMortgage + monthlyRateFinal;
+    return quote;
+}
+
+console.log(mortgageCalculator2(200000,.05,30,.011,.01,.009));
+
 
 /* 🏡 Build a calculator function that accepts `monthly payment` and `interest rate` and returns the maximum loan that a person could afford */
 
 
 /* 🏡 Explore using `window.prompt()` to allow a user to input parameters in the browser */
 
+function windowPrompt() {
+    var name = prompt("Please enter your name", "Enter Here");
+    if (name != null) {
+      document.getElementById("demo").innerHTML =
+      "Hi " + name + "!";
+    }
+  }
 
+  function windowPrompt2() {
+    var budget = prompt("What's your budget?", "$300,000");
+    if (budget != null) {
+      document.getElementById("demo2").innerHTML =
+      name + " your maximum loan budget is " + budget;
+    }
+  }
+
+  function windowPrompt3() {
+    var approve = prompt("Sound good? (yes/no)", "Yes");
+    if (approve != null) {
+      document.getElementById("demo3").innerHTML =
+      "Awesome, " + name + ", your monthly payment is only $1,200!";
+    }
+  }
+  
 /* 🏡  Refactor your `variableInterestRate()` function to accept an array of interest rates (make sure to copy and paste as to not lose your work!) */
