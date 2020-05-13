@@ -41,7 +41,7 @@ When your math is correct, monthlyRate will equal 1073.64
 let numerator = principal * (monthlyInterestRate *Math.pow((1 + monthlyInterestRate), periods));
 let denominator = Math.pow((1 + monthlyInterestRate),periods)-1;  
 monthlyRateLong = numerator / denominator;
-monthlyRate = monthlyRateLong.toFixed(2);
+monthlyRate = "$" + monthlyRateLong.toFixed(2);
 
 console.log(monthlyRate);
 
@@ -52,7 +52,7 @@ If your name is `Oscar` mortgageCalculator() should return "Oscar, your monthly 
 */
 
 function mortgageCalculator(){
-    let namedMortgage = name +", your monthly rate is $";
+    let namedMortgage = name +", your monthly rate is ";
     let quote = namedMortgage + monthlyRate;
     return quote;
 }
@@ -77,7 +77,7 @@ function mortgageCalculator2(P, I, N){
     return quote;
 }
 
-console.log(mortgageCalculator2(200000,.05,30));
+console.log(mortgageCalculator2(100000,.05,30));
 
 // 🏡 Task 5: Conditionals
 /* Add another paramter to your function called credit score. This parameter will be a number between 0 and 800 (a credit score).
@@ -151,22 +151,33 @@ variableInterestRate(200000, 0.04, 30);
 
 /*  🏡 Add  `Property Tax`, `Homeowner's insurance` and `HOA fees` as parameters in your function to calculate total monthly spending on housing */
 
-function mortgageCalculator2(P, I, N, PT, HI, HOA){
+function mortgageCalculatorS(P, I, N, PT, HI, HOA){
     let numerator = (I/12) * Math.pow((1 + (I/12)), (N*12));
     let denominator = Math.pow((1 + (I/12)),(N*12))-1;  
     let monthlyRateLong = P * (numerator / denominator);
     let monthlyRate = monthlyRateLong + (monthlyRateLong*PT) + (monthlyRateLong*HI) + (monthlyRateLong*HOA)
     let monthlyRateFinal = monthlyRate.toFixed(2);
-    let namedMortgage = name +", your monthly rate is $";
+    let namedMortgage = name +", your monthly rate including Property Tax, Homeowner's Insurance, and HOA fees is $";
     let quote = namedMortgage + monthlyRateFinal;
     return quote;
 }
 
-console.log(mortgageCalculator2(200000,.05,30,.011,.01,.009));
+console.log(mortgageCalculatorS(200000,.05,30,.011,.01,.009));
 
 
 /* 🏡 Build a calculator function that accepts `monthly payment` and `interest rate` and returns the maximum loan that a person could afford */
 
+function maxLoan(M, I){
+  let numerator = (I/12) * Math.pow((1 + (I/12)), (30*12));
+  let denominator = Math.pow((1 + (I/12)),(30*12))-1;  
+  let maxLoanLong = M / (numerator / denominator);
+  let maxLoan = Math.ceil(maxLoanLong);
+  let namedMortgage = name +", your maximum loan amount is $";
+  let quote = namedMortgage + maxLoan;
+  return quote;
+}
+
+console.log(maxLoan(1073.64, .05));
 
 /* 🏡 Explore using `window.prompt()` to allow a user to input parameters in the browser */
 
@@ -190,10 +201,8 @@ function windowPrompt() {
     var approve = prompt("Sound good? (yes/no)", "Yes");
     if (approve != null) {
       document.getElementById("demo3").innerHTML =
-      "Awesome, " + name + ", your monthly payment is only $1,200!";
+      "Awesome, " + name + ", your monthly payment is only $1,276.64";
     }
   }
   
 /* 🏡  Refactor your `variableInterestRate()` function to accept an array of interest rates (make sure to copy and paste as to not lose your work!) */
-
-// working on this
